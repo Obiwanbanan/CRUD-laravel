@@ -10,11 +10,12 @@ class UsersController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        //
+        $users = User::get();
+        return view('index', compact('users'));
     }
 
     /**
@@ -24,7 +25,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('form');
     }
 
     /**
@@ -42,11 +43,11 @@ class UsersController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\user  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(user $user)
     {
-        //
+        return view('show');
     }
 
     /**
@@ -57,7 +58,7 @@ class UsersController extends Controller
      */
     public function edit(user $user)
     {
-        //
+        return view('form', compact('user'));
     }
 
     /**
