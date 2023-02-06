@@ -21,7 +21,14 @@
              </td>
             <td> {{ $user->email }}</td>
             <td>
-                <a class="btn btn-info" href="{{ route('users.edit', $user) }}"> Edit </a>
+                <form action="{{ route('users.destroy', $user) }}" method="POST">
+                    <a class="btn btn-info" href="{{ route('users.edit', $user) }}"> Edit </a>
+                    @method('DELETE')
+                    @csrf
+                        <button class="btn btn-danger" type="submit">
+                            Delete
+                        </button>
+                </form>
             </td>
         </tr>
     @endforeach
