@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class UsersController extends Controller
     public function index()
     {
 
-        $users = User::get();
+        $users = User::paginate(20);
         return view('index', compact('users'));
     }
 
@@ -34,10 +35,10 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         User::create($request->only(['name', 'email']));
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->withSuccess('Update user ' . $request->name);
     }
 
     /**
@@ -69,10 +70,10 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
         $user->update($request->only(['name', 'email']));
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->withSuccess('Update user ' . $user->name);
     }
 
     /**
@@ -83,8 +84,9 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
+
         $user->delete();
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->withDanged('Deleted user ' . $user->name);
 
     }
 }
