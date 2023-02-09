@@ -14,7 +14,7 @@
             @method('PUT')
         @endisset
         <div class="row">
-            <div class="row">
+            <div>
                 <input name="name"
                        value="{{ old('name', isset($user) ? $user->name : null) }}"
                        type="text" class="form-control" placeholder="Name" aria-label="name">
@@ -22,7 +22,7 @@
                   <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="row mt-3">
+            <div class="mt-3">
                 <input name="email"
                        value="{{ old('email', isset($user) ? $user->email : null)  }}"
                        type="text" class="form-control" placeholder="Email" aria-label="email">
